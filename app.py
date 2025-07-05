@@ -151,4 +151,8 @@ def server_error(error):
     return render_template('500.html'), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000) 
+    # Get port from environment variable or default to 5000
+    port = int(os.getenv('PORT', 5000))
+    debug_mode = os.getenv('FLASK_ENV', 'production') == 'development'
+    
+    app.run(debug=debug_mode, host='0.0.0.0', port=port) 
