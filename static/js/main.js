@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
 
-    // Contact form handling
+    // Contact form handling with validation
     const contactForm = document.getElementById('contact-form');
     
     contactForm.addEventListener('submit', async function(e) {
@@ -116,10 +116,41 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const formData = new FormData(this);
         const data = {
-            name: formData.get('name'),
-            email: formData.get('email'),
-            message: formData.get('message')
+            name: formData.get('name').trim(),
+            email: formData.get('email').trim(),
+            message: formData.get('message').trim()
         };
+
+        // Client-side validation
+        if (!data.name) {
+            showNotification('Name is required.', 'error');
+            return;
+        }
+        
+        if (!data.email) {
+            showNotification('Email is required.', 'error');
+            return;
+        }
+        
+        if (!validateEmail(data.email)) {
+            showNotification('Please enter a valid email address.', 'error');
+            return;
+        }
+        
+        if (!data.message) {
+            showNotification('Message is required.', 'error');
+            return;
+        }
+        
+        if (data.message.length < 10) {
+            showNotification('Message must be at least 10 characters long.', 'error');
+            return;
+        }
+        
+        if (data.message.length > 1000) {
+            showNotification('Message must be less than 1000 characters.', 'error');
+            return;
+        }
 
         // Show loading state
         const submitBtn = this.querySelector('button[type="submit"]');
@@ -138,20 +169,68 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const result = await response.json();
 
-            if (response.ok) {
+            if (response.ok && result.status === 'success') {
                 showNotification(result.message, 'success');
                 contactForm.reset();
             } else {
-                showNotification(result.message, 'error');
+                showNotification(result.message || 'Something went wrong. Please try again.', 'error');
             }
         } catch (error) {
             console.error('Error:', error);
-            showNotification('Something went wrong. Please try again.', 'error');
+            showNotification('Network error. Please check your connection and try again.', 'error');
         } finally {
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
         }
     });
+
+    // Email validation helper
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+
+    // Real-time validation feedback
+    const emailInput = document.getElementById('email');
+    const messageInput = document.getElementById('message');
+    
+    emailInput.addEventListener('blur', function() {
+        const email = this.value.trim();
+        if (email && !validateEmail(email)) {
+            this.style.borderColor = '#ef4444';
+            showNotification('Please enter a valid email address.', 'error');
+        } else {
+            this.style.borderColor = '';
+        }
+    });
+
+    messageInput.addEventListener('input', function() {
+        const message = this.value.trim();
+        const counter = document.getElementById('message-counter') || createMessageCounter();
+        
+        counter.textContent = `${message.length}/1000 characters`;
+        
+        if (message.length > 1000) {
+            counter.style.color = '#ef4444';
+            this.style.borderColor = '#ef4444';
+        } else {
+            counter.style.color = '#6b7280';
+            this.style.borderColor = '';
+        }
+    });
+
+    function createMessageCounter() {
+        const counter = document.createElement('div');
+        counter.id = 'message-counter';
+        counter.style.cssText = `
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-top: 0.25rem;
+            text-align: right;
+        `;
+        messageInput.parentNode.appendChild(counter);
+        return counter;
+    }
 
     // Notification system
     function showNotification(message, type) {

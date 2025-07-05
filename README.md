@@ -9,7 +9,7 @@ A beautiful, responsive portfolio website built with Flask and modern web techno
 - **Interactive Elements**: Smooth scrolling, animated skill bars, and form validation
 - **SEO Optimized**: Proper meta tags, semantic HTML, and structured data
 - **Performance Optimized**: Lazy loading, optimized assets, and efficient code
-- **Contact Form**: Functional contact form with validation and feedback
+- **Contact Form**: Functional contact form with email notifications and validation
 - **Error Pages**: Custom 404 and 500 error pages
 
 ## Technologies Used
@@ -61,7 +61,13 @@ portfolio/
    ```
 
 4. **Set up environment variables**:
-   - Copy `.env` file and update with your information
+   Create a `.env` file in the project root:
+   ```env
+   SECRET_KEY=your-secret-key-here
+   MAIL_USERNAME=your-email@gmail.com
+   MAIL_PASSWORD=your-app-password
+   MAIL_DEFAULT_SENDER=your-email@gmail.com
+   ```
    - Update the portfolio data in `app.py`
 
 5. **Run the application**:
@@ -126,6 +132,38 @@ Customize the design by modifying CSS variables in `static/css/style.css`:
     /* Modify colors to match your brand */
 }
 ```
+
+### Email Configuration
+
+To enable the contact form to send emails:
+
+1. **Gmail Setup** (Recommended):
+   - Enable 2-factor authentication on your Google account
+   - Generate an App Password: Account Settings → Security → App passwords
+   - Use the app password in your `.env` file
+
+2. **Environment Variables**:
+   ```env
+   MAIL_SERVER=smtp.gmail.com
+   MAIL_PORT=587
+   MAIL_USE_TLS=True
+   MAIL_USERNAME=your-email@gmail.com
+   MAIL_PASSWORD=your-app-password
+   MAIL_DEFAULT_SENDER=your-email@gmail.com
+   ```
+
+3. **Alternative Email Providers**:
+   - **Outlook**: `smtp.live.com:587`
+   - **Yahoo**: `smtp.mail.yahoo.com:587`
+   - **SendGrid**: `smtp.sendgrid.net:587` (for production)
+
+4. **Contact Form Features**:
+   - Sends notification email to you when someone contacts you
+   - Sends auto-reply confirmation to the sender
+   - Includes form validation and error handling
+   - Works without email configuration (logs messages for demo)
+
+**Note**: See `email_setup.md` for detailed configuration instructions.
 
 ## Deployment
 

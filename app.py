@@ -4,8 +4,10 @@ A clean, responsive portfolio built with Flask
 """
 
 from flask import Flask, render_template, request, jsonify
+from flask_mail import Mail, Message
 from werkzeug.exceptions import NotFound
 import os
+import re
 from datetime import datetime
 from dotenv import load_dotenv
 
@@ -14,6 +16,18 @@ load_dotenv()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-secret-key-change-in-production')
+
+# Mail configuration
+app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER', 'smtp.gmail.com')
+app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT', 587))
+app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS', 'True').lower() == 'true'
+app.config['MAIL_USE_SSL'] = os.getenv('MAIL_USE_SSL', 'False').lower() == 'true'
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER', os.getenv('MAIL_USERNAME'))
+
+# Initialize Flask-Mail
+mail = Mail(app)
 
 # Add current year to template context
 @app.context_processor
@@ -118,26 +132,144 @@ def index():
     """Main portfolio page"""
     return render_template('index.html', data=PORTFOLIO_DATA)
 
+def validate_email(email):
+    """Validate email format"""
+    pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    return re.match(pattern, email) is not None
+
+def send_contact_email(name, email, message):
+    """Send contact form email"""
+    try:
+        # Email to yourself (notification)
+        notification_msg = Message(
+            subject=f'New Portfolio Contact: {name}',
+            recipients=[PORTFOLIO_DATA['email']],
+            body=f"""
+You have received a new message from your portfolio website:
+
+Name: {name}
+Email: {email}
+
+Message:
+{message}
+
+---
+Sent from your portfolio contact form
+            """.strip()
+        )
+        
+        # Auto-reply to the sender
+        auto_reply_msg = Message(
+            subject='Thanks for contacting me!',
+            recipients=[email],
+            body=f"""
+Hi {name},
+
+Thank you for reaching out! I've received your message and will get back to you as soon as possible.
+
+Here's a copy of your message:
+"{message}"
+
+Best regards,
+{PORTFOLIO_DATA['name']}
+
+---
+This is an automated response from {PORTFOLIO_DATA['name']}'s portfolio website.
+            """.strip()
+        )
+        
+        # Send both emails
+        mail.send(notification_msg)
+        mail.send(auto_reply_msg)
+        
+        return True
+    except Exception as e:
+        print(f"Email sending failed: {str(e)}")
+        return False
+
 @app.route('/api/contact', methods=['POST'])
 def contact():
     """Handle contact form submission"""
     try:
         data = request.get_json()
-        name = data.get('name')
-        email = data.get('email')
-        message = data.get('message')
         
-        # Here you would typically send an email or save to database
-        # For now, we'll just return a success response
+        if not data:
+            return jsonify({
+                'status': 'error',
+                'message': 'No data received.'
+            }), 400
         
-        return jsonify({
-            'status': 'success',
-            'message': 'Thank you for your message! I\'ll get back to you soon.'
-        })
+        name = data.get('name', '').strip()
+        email = data.get('email', '').strip()
+        message = data.get('message', '').strip()
+        
+        # Validate required fields
+        if not name:
+            return jsonify({
+                'status': 'error',
+                'message': 'Name is required.'
+            }), 400
+            
+        if not email:
+            return jsonify({
+                'status': 'error',
+                'message': 'Email is required.'
+            }), 400
+            
+        if not message:
+            return jsonify({
+                'status': 'error',
+                'message': 'Message is required.'
+            }), 400
+        
+        # Validate email format
+        if not validate_email(email):
+            return jsonify({
+                'status': 'error',
+                'message': 'Please enter a valid email address.'
+            }), 400
+        
+        # Validate message length
+        if len(message) < 10:
+            return jsonify({
+                'status': 'error',
+                'message': 'Message must be at least 10 characters long.'
+            }), 400
+            
+        if len(message) > 1000:
+            return jsonify({
+                'status': 'error',
+                'message': 'Message must be less than 1000 characters.'
+            }), 400
+        
+        # Check if email is configured
+        if not app.config.get('MAIL_USERNAME'):
+            # Fallback: just log the message (for development/demo)
+            print(f"Contact form submission from {name} ({email}): {message}")
+            return jsonify({
+                'status': 'success',
+                'message': 'Thank you for your message! I\'ll get back to you soon. (Email not configured - message logged for demo purposes)'
+            })
+        
+        # Try to send email
+        if send_contact_email(name, email, message):
+            return jsonify({
+                'status': 'success',
+                'message': 'Thank you for your message! I\'ve received it and will get back to you soon. Check your email for a confirmation.'
+            })
+        else:
+            # Fallback if email fails
+            print(f"Email failed, logging message from {name} ({email}): {message}")
+            return jsonify({
+                'status': 'success',
+                'message': 'Thank you for your message! I\'ve received it and will get back to you soon.'
+            })
+            
     except Exception as e:
+        print(f"Contact form error: {str(e)}")
         return jsonify({
             'status': 'error',
-            'message': 'Something went wrong. Please try again.'
+            'message': 'Something went wrong. Please try again or contact me directly.'
         }), 500
 
 @app.errorhandler(404)
