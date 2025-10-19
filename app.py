@@ -87,6 +87,14 @@ PORTFOLIO_DATA = {
             'live_url': 'https://budgetmanager.streamlit.app',
             'image': 'budget-manager.png'
         },
+        {
+            'id': 4,
+            'title': 'Skrow - Freelance Marketplace',
+            'description': 'Skrow is a modern, full-featured freelance marketplace platform designed specifically for the Tunisian market, connecting local freelancers with clients both domestically and internationally. The platform bridges the gap between skilled Tunisian professionals and businesses seeking quality services, while supporting the local economy and digital transformation.',
+            'technologies': ['Django', 'React', 'PostgreSQL', 'Docker', 'Azure', 'Celery', 'Redis', 'WebSocket'],
+            'live_url': 'https://skrow.switzerlandnorth.cloudapp.azure.com',
+            'image': 'skrow1.png'
+        },
     ],
     'experience': [
         {
