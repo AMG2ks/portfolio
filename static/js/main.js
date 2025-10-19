@@ -67,23 +67,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Animate skill bars on scroll
-    const skillBars = document.querySelectorAll('.skill-progress');
-    
-    function animateSkillBars() {
-        skillBars.forEach(bar => {
-            const barTop = bar.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            
-            if (barTop < windowHeight * 0.8) {
-                const width = bar.getAttribute('data-width');
-                bar.style.width = width + '%';
-            }
-        });
-    }
-
-    window.addEventListener('scroll', animateSkillBars);
-    
     // Intersection Observer for animations
     const observerOptions = {
         threshold: 0.1,
@@ -100,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, observerOptions);
 
     // Observe elements for animation
-    const animateElements = document.querySelectorAll('.skill-card, .project-card, .timeline-item');
+    const animateElements = document.querySelectorAll('.project-card, .timeline-item, .skill-badge');
     animateElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
@@ -429,10 +412,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Apply throttling to scroll events
-    window.addEventListener('scroll', throttle(function() {
-        highlightNavLink();
-        animateSkillBars();
-    }, 100));
+    window.addEventListener('scroll', throttle(highlightNavLink, 100));
 
     // Add loading screen
     function showLoadingScreen() {

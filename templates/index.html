@@ -75,17 +75,9 @@
             <h2 class="section-title">Skills & Technologies</h2>
             <p class="section-subtitle">Technologies I work with</p>
         </div>
-        <div class="skills-grid">
+        <div class="skills-cloud">
             {% for skill in data.skills %}
-            <div class="skill-card">
-                <div class="skill-info">
-                    <h3 class="skill-name">{{ skill.name }}</h3>
-                    <span class="skill-percentage">{{ skill.level }}%</span>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" data-width="{{ skill.level }}"></div>
-                </div>
-            </div>
+            <span class="skill-badge">{{ skill }}</span>
             {% endfor %}
         </div>
     </div>
@@ -102,9 +94,13 @@
             {% for project in data.projects %}
             <div class="project-card">
                 <div class="project-image">
+                    {% if project.image %}
+                    <img src="{{ url_for('static', filename='assets/' + project.image) }}" alt="{{ project.title }}" class="project-img">
+                    {% else %}
                     <div class="project-placeholder">
                         <i class="fas fa-laptop-code"></i>
                     </div>
+                    {% endif %}
                 </div>
                 <div class="project-content">
                     <h3 class="project-title">{{ project.title }}</h3>
@@ -115,14 +111,18 @@
                         {% endfor %}
                     </div>
                     <div class="project-links">
+                        {% if project.github_url and project.github_url != 'https://github.com/' %}
                         <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer" class="project-link">
                             <i class="fab fa-github"></i>
                             Code
                         </a>
+                        {% endif %}
+                        {% if project.live_url and project.live_url != '#' %}
                         <a href="{{ project.live_url }}" target="_blank" rel="noopener noreferrer" class="project-link">
                             <i class="fas fa-external-link-alt"></i>
                             Live Demo
                         </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

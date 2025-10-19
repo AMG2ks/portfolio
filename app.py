@@ -44,22 +44,36 @@ PORTFOLIO_DATA = {
     'linkedin': 'https://www.linkedin.com/in/aziz-guebsi/',
     'location': 'Tunis, Tunisia',
     'skills': [
-        {'name': 'Python', 'level': 90},
-        {'name': 'Django', 'level': 90},
-        {'name': 'Angular', 'level': 85},
-        {'name': 'JavaScript', 'level': 85},
-        {'name': 'TypeScript', 'level': 80},
-        {'name': 'React JS', 'level': 80},
-        {'name': 'Streamlit', 'level': 85},
-        {'name': 'PostgreSQL', 'level': 85},
-        {'name': 'Docker', 'level': 80},
-        {'name': 'RabbitMQ', 'level': 75},
-        {'name': 'HTML/CSS', 'level': 90},
-        {'name': 'Git', 'level': 85},
-        {'name': 'Three JS', 'level': 70},
-        {'name': 'Tailwind CSS', 'level': 75}
+        'Python',
+        'Django',
+        'Angular',
+        'JavaScript',
+        'TypeScript',
+        'React',
+        'Streamlit',
+        'PostgreSQL',
+        'Docker',
+        'RabbitMQ',
+        'HTML/CSS',
+        'Git',
+        'Three.js',
+        'Tailwind CSS',
+        'Flask',
+        'Redis',
+        'Celery',
+        'Azure',
+        'WebSocket',
+        'Keycloak'
     ],
     'projects': [
+                {
+            'id': 4,
+            'title': 'Skrow - Freelance Marketplace',
+            'description': 'Skrow is a modern, full-featured freelance marketplace platform designed specifically for the Tunisian market, connecting local freelancers with clients both domestically and internationally. The platform bridges the gap between skilled Tunisian professionals and businesses seeking quality services, while supporting the local economy and digital transformation.',
+            'technologies': ['Django', 'React', 'PostgreSQL', 'Docker', 'Azure', 'Celery', 'Redis', 'WebSocket'],
+            'live_url': 'https://skrow.switzerlandnorth.cloudapp.azure.com',
+            'image': 'skrow1.png'
+        },
         {
             'id': 1,
             'title': 'IoT Device Monitoring Dashboard',
@@ -67,7 +81,7 @@ PORTFOLIO_DATA = {
             'technologies': ['Django', 'Angular', 'ChartJS', 'PostgreSQL'],
             'github_url': 'https://github.com/DigiSmartSolutions',
             'live_url': '#',
-            'image': 'iot-dashboard.jpg'
+            'image': 'iot.jpg'
         },
         {
             'id': 2,
@@ -76,7 +90,7 @@ PORTFOLIO_DATA = {
             'technologies': ['Django', 'Angular', 'RabbitMQ', 'Docker'],
             'github_url': 'https://github.com/',
             'live_url': '#',
-            'image': 'berrysign.jpg'
+            'image': 'requests.png'
         },
         {
             'id': 3,
@@ -85,15 +99,7 @@ PORTFOLIO_DATA = {
             'technologies': ['Python', 'Streamlit', 'SQLite', 'PostgreSQL'],
             'github_url': 'https://github.com/AMG2ks/budget_manager',
             'live_url': 'https://budgetmanager.streamlit.app',
-            'image': 'budget-manager.png'
-        },
-        {
-            'id': 4,
-            'title': 'Skrow - Freelance Marketplace',
-            'description': 'Skrow is a modern, full-featured freelance marketplace platform designed specifically for the Tunisian market, connecting local freelancers with clients both domestically and internationally. The platform bridges the gap between skilled Tunisian professionals and businesses seeking quality services, while supporting the local economy and digital transformation.',
-            'technologies': ['Django', 'React', 'PostgreSQL', 'Docker', 'Azure', 'Celery', 'Redis', 'WebSocket'],
-            'live_url': 'https://skrow.switzerlandnorth.cloudapp.azure.com',
-            'image': 'skrow1.png'
+            'image': 'budget_manager.png'
         },
     ],
     'experience': [
