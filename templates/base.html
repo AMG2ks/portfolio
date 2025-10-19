@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ get_locale() }}" dir="{{ 'rtl' if get_locale() == 'ar' else 'ltr' }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,12 +42,26 @@
                 <a href="#home">{{ data.name }}</a>
             </div>
             <div class="nav-menu" id="nav-menu">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#experience" class="nav-link">Experience</a>
-                <a href="#contact" class="nav-link">Contact</a>
+                <a href="#home" class="nav-link">{{ t('nav.home') }}</a>
+                <a href="#about" class="nav-link">{{ t('nav.about') }}</a>
+                <a href="#skills" class="nav-link">{{ t('nav.skills') }}</a>
+                <a href="#projects" class="nav-link">{{ t('nav.projects') }}</a>
+                <a href="#experience" class="nav-link">{{ t('nav.experience') }}</a>
+                <a href="#contact" class="nav-link">{{ t('nav.contact') }}</a>
+                <div class="language-selector">
+                    <button class="lang-btn" id="lang-btn">
+                        <i class="fas fa-globe"></i>
+                        <span class="current-lang">{{ languages[get_locale()] }}</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="lang-dropdown" id="lang-dropdown">
+                        {% for code, name in languages.items() %}
+                        <a href="#" class="lang-option" data-lang="{{ code }}" {% if code == get_locale() %}data-active="true"{% endif %}>
+                            {{ name }}
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
             <div class="nav-toggle" id="nav-toggle">
                 <span class="bar"></span>
@@ -71,16 +85,16 @@
                     <p>{{ data.bio }}</p>
                 </div>
                 <div class="footer-section">
-                    <h4>Quick Links</h4>
+                    <h4>{{ t('footer.quick_links') }}</h4>
                     <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#projects">Projects</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#home">{{ t('nav.home') }}</a></li>
+                        <li><a href="#about">{{ t('nav.about') }}</a></li>
+                        <li><a href="#projects">{{ t('nav.projects') }}</a></li>
+                        <li><a href="#contact">{{ t('nav.contact') }}</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Connect</h4>
+                    <h4>{{ t('footer.connect') }}</h4>
                     <div class="social-links">
                         <a href="{{ data.github }}" target="_blank" rel="noopener noreferrer">
                             <i class="fab fa-github"></i>
@@ -95,7 +109,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; {{ current_year }} {{ data.name }}. All rights reserved.</p>
+                <p>&copy; {{ current_year }} {{ data.name }}. {{ t('footer.rights') }}</p>
             </div>
         </div>
     </footer>

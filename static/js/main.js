@@ -1,5 +1,46 @@
 // Modern Portfolio JavaScript
 document.addEventListener('DOMContentLoaded', function() {
+    // Language Selector
+    const langBtn = document.getElementById('lang-btn');
+    const langDropdown = document.getElementById('lang-dropdown');
+    const langOptions = document.querySelectorAll('.lang-option');
+
+    if (langBtn && langDropdown) {
+        // Toggle dropdown
+        langBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            langBtn.classList.toggle('active');
+            langDropdown.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function() {
+            langBtn.classList.remove('active');
+            langDropdown.classList.remove('active');
+        });
+
+        // Handle language selection
+        langOptions.forEach(option => {
+            option.addEventListener('click', function(e) {
+                e.preventDefault();
+                const lang = this.getAttribute('data-lang');
+                
+                // Call API to set language
+                fetch(`/set_language/${lang}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            // Reload page to apply new language
+                            window.location.reload();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error setting language:', error);
+                    });
+            });
+        });
+    }
+
     // Mobile navigation
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');

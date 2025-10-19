@@ -1,0 +1,116 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "about": "Über mich",
+    "skills": "Fähigkeiten",
+    "projects": "Projekte",
+    "experience": "Erfahrung",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "greeting": "Hallo, ich bin",
+    "view_work": "Meine Arbeit ansehen",
+    "get_in_touch": "Kontakt aufnehmen"
+  },
+  "about": {
+    "title": "Über mich",
+    "subtitle": "Lerne mich besser kennen",
+    "bio_extended": "Ich bin leidenschaftlich daran interessiert, innovative Lösungen zu schaffen, die einen Unterschied machen. Mit einer soliden Grundlage in Frontend- und Backend-Technologien baue ich gerne Anwendungen, die nicht nur funktional sind, sondern auch außergewöhnliche Benutzererlebnisse bieten.",
+    "stats": {
+      "projects": "Projekte",
+      "experience": "Jahre Erfahrung",
+      "technologies": "Technologien"
+    }
+  },
+  "skills": {
+    "title": "Fähigkeiten & Technologien",
+    "subtitle": "Technologien, mit denen ich arbeite"
+  },
+  "projects": {
+    "title": "Meine Projekte",
+    "subtitle": "Was ich gebaut habe",
+    "code": "Code",
+    "live_demo": "Live-Demo"
+  },
+  "experience": {
+    "title": "Erfahrung",
+    "subtitle": "Meine berufliche Reise"
+  },
+  "contact": {
+    "title": "Kontakt aufnehmen",
+    "subtitle": "Lass uns zusammenarbeiten",
+    "lets_talk": "Lass uns über dein Projekt sprechen",
+    "description": "Ich bin immer an neuen Möglichkeiten und spannenden Projekten interessiert. Egal ob du eine Frage hast oder einfach nur Hallo sagen möchtest, ich werde mein Bestes tun, um dir zu antworten!",
+    "your_name": "Dein Name",
+    "your_email": "Deine E-Mail",
+    "your_message": "Deine Nachricht",
+    "send_message": "Nachricht senden"
+  },
+  "footer": {
+    "quick_links": "Schnelllinks",
+    "connect": "Verbinden",
+    "rights": "Alle Rechte vorbehalten"
+  },
+  "profile": {
+    "name": "Aziz Guebsi",
+    "title": "Software-Ingenieur & Full-Stack-Entwickler",
+    "bio": "Leidenschaftlicher Software-Ingenieur, spezialisiert auf Microservices-Architektur, digitale Sicherheitslösungen und moderne Webtechnologien. Erfahren im Erstellen skalierbarer Anwendungen mit Django, Angular und Cloud-nativen Technologien.",
+    "location": "Tunis, Tunesien"
+  },
+  "projects_data": [
+    {
+      "title": "Skrow - Freelance-Marktplatz",
+      "description": "Skrow ist eine moderne, voll ausgestattete Freelance-Marktplatz-Plattform, die speziell für den tunesischen Markt entwickelt wurde und lokale Freelancer mit Kunden im In- und Ausland verbindet. Die Plattform schließt die Lücke zwischen qualifizierten tunesischen Fachleuten und Unternehmen, die Qualitätsdienstleistungen suchen, und unterstützt gleichzeitig die lokale Wirtschaft und die digitale Transformation."
+    },
+    {
+      "title": "IoT-Geräte-Überwachungs-Dashboard",
+      "description": "Webbasierte Plattform zur Überwachung von IoT-Geräten mit Echtzeit-Datenvisualisierung und -Analysen, die umfassende Einblicke in die Geräteleistung und den Status bietet."
+    },
+    {
+      "title": "BerrySign Digitale Signatur-Plattform",
+      "description": "BerrySign ist eine sichere digitale Signaturplattform, die es Benutzern ermöglicht, Dokumente elektronisch zu signieren, den Dokumentensignierungsprozess zu optimieren und Papierverschwendung mit Microservice-Architektur zu reduzieren."
+    },
+    {
+      "title": "Intelligenter Budget-Manager",
+      "description": "Eine umfassende Finanzverwaltungsanwendung mit intelligentem Budget-Tracking, Ausgabenüberwachung und Sparzielen. Bietet Multi-User-Unterstützung, automatische Backups und unterstützt 21 internationale Währungen mit schönen Dashboard-Analysen."
+    }
+  ],
+  "experience_data": [
+    {
+      "company": "Digitalberry",
+      "position": "Software-Ingenieur",
+      "period": "Juli 2023 - Heute",
+      "description": "Entwicklung und Sicherung von Microservices mit erweiterten Authentifizierungssystemen und Zertifikatsverwaltung.",
+      "achievements": [
+        "Entwicklung und Sicherung von Microservices – Entwurf, Implementierung und Optimierung sicherer Microservices-Architekturen, Sicherstellung einer nahtlosen Integration mit Authentifizierungssystemen wie Keycloak",
+        "Zertifikats- und Token-Verwaltung – Arbeit an BerryCert und der neuen Token-Verwaltungsplattform, Handhabung von TLS-Anmeldeinformationen, YubiKey und SafeNet-Integrationen",
+        "Leistungsoptimierung & Automatisierung – Verbesserung der Systemleistung durch Optimierung von API-Aufrufen, Implementierung von Multi-Threading und Automatisierung wichtiger Workflows für verbesserte Effizienz"
+      ]
+    },
+    {
+      "company": "Digitalberry",
+      "position": "Full-Stack-Entwickler - Praktikant",
+      "period": "Februar 2023 - Mai 2023",
+      "description": "Aufbau einer umfassenden digitalen Signaturplattform mit Microservice-Architektur.",
+      "achievements": [
+        "Aufbau einer digitalen Signaturplattform mit Django, Angular und RabbitMQ",
+        "Zusammenarbeit mit funktionsübergreifenden Teams, einschließlich Designern, Produktmanagern und anderen Entwicklern, um hochwertige Produkte zu erstellen",
+        "Implementierung einer Microservice-Architektur mit Docker",
+        "Implementierung eines Echtzeit-Benachrichtigungssystems mit RabbitMQ"
+      ]
+    },
+    {
+      "company": "Digi Smart Solutions",
+      "position": "Django Angular Entwickler - Praktikant",
+      "period": "Juni 2022 - September 2022",
+      "description": "Entwicklung und Wartung von Webanwendungen mit Django- und Angular-Technologien.",
+      "achievements": [
+        "Entwicklung und Wartung von Webanwendungen mit Django und anderen verwandten Technologien",
+        "Erstellung von Benutzeroberflächen mit Angular und anderen Frontend-Technologien",
+        "Erstellung von RESTful-APIs und Integration von Drittanbieterdiensten",
+        "Erstellung und Wartung von Dokumentation für Projekte"
+      ]
+    }
+  ]
+}
+

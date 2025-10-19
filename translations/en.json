@@ -1,0 +1,116 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "experience": "Experience",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hello, I'm",
+    "view_work": "View My Work",
+    "get_in_touch": "Get In Touch"
+  },
+  "about": {
+    "title": "About Me",
+    "subtitle": "Get to know me better",
+    "bio_extended": "I'm passionate about creating innovative solutions that make a difference. With a strong foundation in both frontend and backend technologies, I enjoy building applications that are not only functional but also provide exceptional user experiences.",
+    "stats": {
+      "projects": "Projects",
+      "experience": "Years Experience",
+      "technologies": "Technologies"
+    }
+  },
+  "skills": {
+    "title": "Skills & Technologies",
+    "subtitle": "Technologies I work with"
+  },
+  "projects": {
+    "title": "My Projects",
+    "subtitle": "Things I've built",
+    "code": "Code",
+    "live_demo": "Live Demo"
+  },
+  "experience": {
+    "title": "Experience",
+    "subtitle": "My professional journey"
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "subtitle": "Let's work together",
+    "lets_talk": "Let's talk about your project",
+    "description": "I'm always interested in new opportunities and exciting projects. Whether you have a question or just want to say hi, I'll try my best to get back to you!",
+    "your_name": "Your Name",
+    "your_email": "Your Email",
+    "your_message": "Your Message",
+    "send_message": "Send Message"
+  },
+  "footer": {
+    "quick_links": "Quick Links",
+    "connect": "Connect",
+    "rights": "All rights reserved"
+  },
+  "profile": {
+    "name": "Aziz Guebsi",
+    "title": "Software Engineer & Full Stack Developer",
+    "bio": "Passionate software engineer specializing in microservices architecture, digital security solutions, and modern web technologies. Experienced in building scalable applications with Django, Angular, and cloud-native technologies.",
+    "location": "Tunis, Tunisia"
+  },
+  "projects_data": [
+    {
+      "title": "Skrow - Freelance Marketplace",
+      "description": "Skrow is a modern, full-featured freelance marketplace platform designed specifically for the Tunisian market, connecting local freelancers with clients both domestically and internationally. The platform bridges the gap between skilled Tunisian professionals and businesses seeking quality services, while supporting the local economy and digital transformation."
+    },
+    {
+      "title": "IoT Device Monitoring Dashboard",
+      "description": "Web-based platform for monitoring IoT devices with real-time data visualization and analytics, providing comprehensive insights into device performance and status."
+    },
+    {
+      "title": "BerrySign Digital Signature Platform",
+      "description": "BerrySign is a secure digital signature platform that allows users to sign documents electronically, streamlining the document signing process and reducing paper waste with microservice architecture."
+    },
+    {
+      "title": "Smart Budget Manager",
+      "description": "A comprehensive financial management application with intelligent budget tracking, expense monitoring, and savings goals. Features multi-user support, automated backups, and supports 21 international currencies with beautiful dashboard analytics."
+    }
+  ],
+  "experience_data": [
+    {
+      "company": "Digitalberry",
+      "position": "Software Engineer",
+      "period": "July 2023 - Present",
+      "description": "Developing and securing microservices with advanced authentication systems and certificate management.",
+      "achievements": [
+        "Developing and Securing Microservices – Design, implement, and optimize secure microservices architectures, ensuring seamless integration with authentication systems like Keycloak",
+        "Certificate and Token Management – Work on BerryCert and the new token management platform, handling TLS credentials, YubiKey, and SafeNet integrations",
+        "Performance Optimization & Automation – Enhance system performance by optimizing API calls, implementing multi-threading, and automating key workflows for improved efficiency"
+      ]
+    },
+    {
+      "company": "Digitalberry",
+      "position": "Full Stack Developer - Intern",
+      "period": "February 2023 - May 2023",
+      "description": "Built comprehensive digital signature platform with microservice architecture.",
+      "achievements": [
+        "Building a Digital-Signature platform using Django, Angular, and RabbitMQ",
+        "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products",
+        "Implementing a microservice architecture using Docker",
+        "Implementing a real-time notification system using RabbitMQ"
+      ]
+    },
+    {
+      "company": "Digi Smart Solutions",
+      "position": "Django Angular Developer - Intern",
+      "period": "June 2022 - September 2022",
+      "description": "Developed and maintained web applications using Django and Angular technologies.",
+      "achievements": [
+        "Developing and maintaining web applications using Django and other related technologies",
+        "Building user interfaces using Angular and other front-end technologies",
+        "Building RESTful APIs and integrating third-party services",
+        "Creating and maintaining documentation for projects"
+      ]
+    }
+  ]
+}
+

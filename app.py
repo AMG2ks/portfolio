@@ -3,11 +3,12 @@ Modern Portfolio Website
 A clean, responsive portfolio built with Flask
 """
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session
 from flask_mail import Mail, Message
 from werkzeug.exceptions import NotFound
 import os
 import re
+import json
 from datetime import datetime
 from dotenv import load_dotenv
 
@@ -16,6 +17,60 @@ load_dotenv()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-secret-key-change-in-production')
+
+# Supported languages
+LANGUAGES = {
+    'en': 'English',
+    'fr': 'Français',
+    'de': 'Deutsch',
+    'ar': 'العربية'
+}
+
+# Load translations
+TRANSLATIONS = {}
+for lang_code in LANGUAGES.keys():
+    try:
+        with open(f'translations/{lang_code}.json', 'r', encoding='utf-8') as f:
+            TRANSLATIONS[lang_code] = json.load(f)
+    except FileNotFoundError:
+        print(f"Warning: Translation file for {lang_code} not found")
+    except json.JSONDecodeError as e:
+        print(f"Error loading translation file for {lang_code}: {e}")
+
+def get_locale():
+    """Get the current locale from session or default to English"""
+    return session.get('lang', 'en')
+
+def get_translation(key_path, default=''):
+    """
+    Get translation for a given key path (e.g., 'nav.home')
+    Returns the translation in the current language or the default value
+    """
+    lang = get_locale()
+    if lang not in TRANSLATIONS:
+        lang = 'en'
+    
+    keys = key_path.split('.')
+    value = TRANSLATIONS.get(lang, {})
+    
+    for key in keys:
+        if isinstance(value, dict):
+            value = value.get(key, default)
+        else:
+            return default
+    
+    return value if value else default
+
+# Make translation function available in templates
+@app.context_processor
+def inject_i18n():
+    """Inject translation functions and language info into templates"""
+    return {
+        'get_locale': get_locale,
+        't': get_translation,
+        'languages': LANGUAGES,
+        'current_year': datetime.now().year
+    }
 
 # Mail configuration
 app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER', 'smtp.gmail.com')
@@ -29,21 +84,22 @@ app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER', os.getenv('
 # Initialize Flask-Mail
 mail = Mail(app)
 
-# Add current year to template context
-@app.context_processor
-def inject_current_year():
-    return {'current_year': datetime.now().year}
-
 # Portfolio data
-PORTFOLIO_DATA = {
-    'name': 'Aziz Guebsi',
-    'title': 'Software Engineer & Full Stack Developer',
-    'bio': 'Passionate software engineer specializing in microservices architecture, digital security solutions, and modern web technologies. Experienced in building scalable applications with Django, Angular, and cloud-native technologies.',
-    'email': 'gabsiaziz37@gmail.com',
-    'github': 'https://github.com/AMG2ks',
-    'linkedin': 'https://www.linkedin.com/in/aziz-guebsi/',
-    'location': 'Tunis, Tunisia',
-    'skills': [
+def get_portfolio_data():
+    """Get portfolio data with translations"""
+    lang = get_locale()
+    translations = TRANSLATIONS.get(lang, TRANSLATIONS.get('en', {}))
+    profile = translations.get('profile', {})
+    
+    portfolio_data = {
+        'name': profile.get('name', 'Aziz Guebsi'),
+        'title': profile.get('title', 'Software Engineer & Full Stack Developer'),
+        'bio': profile.get('bio', 'Passionate software engineer specializing in microservices architecture, digital security solutions, and modern web technologies.'),
+        'email': 'gabsiaziz37@gmail.com',
+        'github': 'https://github.com/AMG2ks',
+        'linkedin': 'https://www.linkedin.com/in/aziz-guebsi/',
+        'location': profile.get('location', 'Tunis, Tunisia'),
+        'skills': [
         'Python',
         'Django',
         'Angular',
@@ -64,87 +120,71 @@ PORTFOLIO_DATA = {
         'Azure',
         'WebSocket',
         'Keycloak'
-    ],
-    'projects': [
-                {
-            'id': 4,
-            'title': 'Skrow - Freelance Marketplace',
-            'description': 'Skrow is a modern, full-featured freelance marketplace platform designed specifically for the Tunisian market, connecting local freelancers with clients both domestically and internationally. The platform bridges the gap between skilled Tunisian professionals and businesses seeking quality services, while supporting the local economy and digital transformation.',
-            'technologies': ['Django', 'React', 'PostgreSQL', 'Docker', 'Azure', 'Celery', 'Redis', 'WebSocket'],
-            'live_url': 'https://skrow.switzerlandnorth.cloudapp.azure.com',
-            'image': 'skrow1.png'
-        },
-        {
-            'id': 1,
-            'title': 'IoT Device Monitoring Dashboard',
-            'description': 'Web-based platform for monitoring IoT devices with real-time data visualization and analytics, providing comprehensive insights into device performance and status.',
-            'technologies': ['Django', 'Angular', 'ChartJS', 'PostgreSQL'],
-            'github_url': 'https://github.com/DigiSmartSolutions',
-            'live_url': '#',
-            'image': 'iot.jpg'
-        },
-        {
-            'id': 2,
-            'title': 'BerrySign Digital Signature Platform',
-            'description': 'BerrySign is a secure digital signature platform that allows users to sign documents electronically, streamlining the document signing process and reducing paper waste with microservice architecture.',
-            'technologies': ['Django', 'Angular', 'RabbitMQ', 'Docker'],
-            'github_url': 'https://github.com/',
-            'live_url': '#',
-            'image': 'requests.png'
-        },
-        {
-            'id': 3,
-            'title': 'Smart Budget Manager',
-            'description': 'A comprehensive financial management application with intelligent budget tracking, expense monitoring, and savings goals. Features multi-user support, automated backups, and supports 21 international currencies with beautiful dashboard analytics.',
-            'technologies': ['Python', 'Streamlit', 'SQLite', 'PostgreSQL'],
-            'github_url': 'https://github.com/AMG2ks/budget_manager',
-            'live_url': 'https://budgetmanager.streamlit.app',
-            'image': 'budget_manager.png'
-        },
-    ],
-    'experience': [
-        {
-            'company': 'Digitalberry',
-            'position': 'Software Engineer',
-            'period': 'July 2023 - Present',
-            'description': 'Developing and securing microservices with advanced authentication systems and certificate management.',
-            'achievements': [
-                'Developing and Securing Microservices – Design, implement, and optimize secure microservices architectures, ensuring seamless integration with authentication systems like Keycloak',
-                'Certificate and Token Management – Work on BerryCert and the new token management platform, handling TLS credentials, YubiKey, and SafeNet integrations',
-                'Performance Optimization & Automation – Enhance system performance by optimizing API calls, implementing multi-threading, and automating key workflows for improved efficiency'
-            ]
-        },
-        {
-            'company': 'Digitalberry',
-            'position': 'Full Stack Developer - Intern',
-            'period': 'February 2023 - May 2023',
-            'description': 'Built comprehensive digital signature platform with microservice architecture.',
-            'achievements': [
-                'Building a Digital-Signature platform using Django, Angular, and RabbitMQ',
-                'Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products',
-                'Implementing a microservice architecture using Docker',
-                'Implementing a real-time notification system using RabbitMQ'
-            ]
-        },
-        {
-            'company': 'Digi Smart Solutions',
-            'position': 'Django Angular Developer - Intern',
-            'period': 'June 2022 - September 2022',
-            'description': 'Developed and maintained web applications using Django and Angular technologies.',
-            'achievements': [
-                'Developing and maintaining web applications using Django and other related technologies',
-                'Building user interfaces using Angular and other front-end technologies',
-                'Building RESTful APIs and integrating third-party services',
-                'Creating and maintaining documentation for projects'
-            ]
-        }
-    ]
-}
+        ],
+        'projects': [
+            {
+                'id': 4,
+                'title': translations.get('projects_data', [{}])[0].get('title', 'Skrow - Freelance Marketplace'),
+                'description': translations.get('projects_data', [{}])[0].get('description', ''),
+                'technologies': ['Django', 'React', 'PostgreSQL', 'Docker', 'Azure', 'Celery', 'Redis', 'WebSocket'],
+                'live_url': 'https://skrow.switzerlandnorth.cloudapp.azure.com',
+                'image': 'skrow1.png'
+            },
+            {
+                'id': 1,
+                'title': translations.get('projects_data', [{}, {}])[1].get('title', 'IoT Device Monitoring Dashboard') if len(translations.get('projects_data', [])) > 1 else 'IoT Device Monitoring Dashboard',
+                'description': translations.get('projects_data', [{}, {}])[1].get('description', '') if len(translations.get('projects_data', [])) > 1 else '',
+                'technologies': ['Django', 'Angular', 'ChartJS', 'PostgreSQL'],
+                'github_url': 'https://github.com/DigiSmartSolutions',
+                'live_url': '#',
+                'image': 'iot.jpg'
+            },
+            {
+                'id': 2,
+                'title': translations.get('projects_data', [{}, {}, {}])[2].get('title', 'BerrySign Digital Signature Platform') if len(translations.get('projects_data', [])) > 2 else 'BerrySign Digital Signature Platform',
+                'description': translations.get('projects_data', [{}, {}, {}])[2].get('description', '') if len(translations.get('projects_data', [])) > 2 else '',
+                'technologies': ['Django', 'Angular', 'RabbitMQ', 'Docker'],
+                'github_url': 'https://github.com/',
+                'live_url': '#',
+                'image': 'requests.png'
+            },
+            {
+                'id': 3,
+                'title': translations.get('projects_data', [{}, {}, {}, {}])[3].get('title', 'Smart Budget Manager') if len(translations.get('projects_data', [])) > 3 else 'Smart Budget Manager',
+                'description': translations.get('projects_data', [{}, {}, {}, {}])[3].get('description', '') if len(translations.get('projects_data', [])) > 3 else '',
+                'technologies': ['Python', 'Streamlit', 'SQLite', 'PostgreSQL'],
+                'github_url': 'https://github.com/AMG2ks/budget_manager',
+                'live_url': 'https://budgetmanager.streamlit.app',
+                'image': 'budget_manager.png'
+            },
+        ],
+        'experience': []
+    }
+    
+    # Add translated experience data
+    exp_data = translations.get('experience_data', [])
+    for i, exp in enumerate(exp_data):
+        portfolio_data['experience'].append({
+            'company': exp.get('company', ''),
+            'position': exp.get('position', ''),
+            'period': exp.get('period', ''),
+            'description': exp.get('description', ''),
+            'achievements': exp.get('achievements', [])
+        })
+    
+    return portfolio_data
 
 @app.route('/')
 def index():
     """Main portfolio page"""
-    return render_template('index.html', data=PORTFOLIO_DATA)
+    return render_template('index.html', data=get_portfolio_data())
+
+@app.route('/set_language/<lang_code>')
+def set_language(lang_code):
+    """Set the language preference"""
+    if lang_code in LANGUAGES:
+        session['lang'] = lang_code
+    return jsonify({'status': 'success', 'language': lang_code})
 
 def validate_email(email):
     """Validate email format"""
@@ -154,10 +194,11 @@ def validate_email(email):
 def send_contact_email(name, email, message):
     """Send contact form email"""
     try:
+        portfolio_data = get_portfolio_data()
         # Email to yourself (notification)
         notification_msg = Message(
             subject=f'New Portfolio Contact: {name}',
-            recipients=[PORTFOLIO_DATA['email']],
+            recipients=[portfolio_data['email']],
             body=f"""
 You have received a new message from your portfolio website:
 
@@ -185,10 +226,10 @@ Here's a copy of your message:
 "{message}"
 
 Best regards,
-{PORTFOLIO_DATA['name']}
+{portfolio_data['name']}
 
 ---
-This is an automated response from {PORTFOLIO_DATA['name']}'s portfolio website.
+This is an automated response from {portfolio_data['name']}'s portfolio website.
             """.strip()
         )
         

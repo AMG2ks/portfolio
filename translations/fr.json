@@ -1,0 +1,116 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "skills": "Compétences",
+    "projects": "Projets",
+    "experience": "Expérience",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Bonjour, je suis",
+    "view_work": "Voir mon travail",
+    "get_in_touch": "Me contacter"
+  },
+  "about": {
+    "title": "À propos de moi",
+    "subtitle": "Apprenez à me connaître",
+    "bio_extended": "Je suis passionné par la création de solutions innovantes qui font la différence. Avec une solide base en technologies frontend et backend, j'aime créer des applications qui sont non seulement fonctionnelles mais offrent également des expériences utilisateur exceptionnelles.",
+    "stats": {
+      "projects": "Projets",
+      "experience": "Années d'expérience",
+      "technologies": "Technologies"
+    }
+  },
+  "skills": {
+    "title": "Compétences & Technologies",
+    "subtitle": "Technologies avec lesquelles je travaille"
+  },
+  "projects": {
+    "title": "Mes projets",
+    "subtitle": "Ce que j'ai construit",
+    "code": "Code",
+    "live_demo": "Démo en direct"
+  },
+  "experience": {
+    "title": "Expérience",
+    "subtitle": "Mon parcours professionnel"
+  },
+  "contact": {
+    "title": "Contactez-moi",
+    "subtitle": "Travaillons ensemble",
+    "lets_talk": "Parlons de votre projet",
+    "description": "Je suis toujours intéressé par de nouvelles opportunités et des projets passionnants. Que vous ayez une question ou que vous vouliez simplement dire bonjour, je ferai de mon mieux pour vous répondre !",
+    "your_name": "Votre nom",
+    "your_email": "Votre email",
+    "your_message": "Votre message",
+    "send_message": "Envoyer le message"
+  },
+  "footer": {
+    "quick_links": "Liens rapides",
+    "connect": "Se connecter",
+    "rights": "Tous droits réservés"
+  },
+  "profile": {
+    "name": "Aziz Guebsi",
+    "title": "Ingénieur logiciel & Développeur Full Stack",
+    "bio": "Ingénieur logiciel passionné spécialisé dans l'architecture microservices, les solutions de sécurité numérique et les technologies web modernes. Expérimenté dans la création d'applications évolutives avec Django, Angular et les technologies cloud-native.",
+    "location": "Tunis, Tunisie"
+  },
+  "projects_data": [
+    {
+      "title": "Skrow - Marketplace Freelance",
+      "description": "Skrow est une plateforme moderne de marketplace freelance conçue spécifiquement pour le marché tunisien, connectant les freelances locaux avec des clients nationaux et internationaux. La plateforme comble le fossé entre les professionnels tunisiens qualifiés et les entreprises recherchant des services de qualité, tout en soutenant l'économie locale et la transformation numérique."
+    },
+    {
+      "title": "Tableau de bord de surveillance IoT",
+      "description": "Plateforme Web pour la surveillance des appareils IoT avec visualisation et analyse de données en temps réel, fournissant des informations complètes sur les performances et l'état des appareils."
+    },
+    {
+      "title": "BerrySign - Plateforme de signature numérique",
+      "description": "BerrySign est une plateforme sécurisée de signature numérique qui permet aux utilisateurs de signer des documents électroniquement, simplifiant le processus de signature de documents et réduisant les déchets de papier avec une architecture de microservices."
+    },
+    {
+      "title": "Gestionnaire de budget intelligent",
+      "description": "Une application complète de gestion financière avec suivi intelligent du budget, surveillance des dépenses et objectifs d'épargne. Comprend le support multi-utilisateurs, les sauvegardes automatiques et prend en charge 21 devises internationales avec de belles analyses de tableau de bord."
+    }
+  ],
+  "experience_data": [
+    {
+      "company": "Digitalberry",
+      "position": "Ingénieur logiciel",
+      "period": "Juillet 2023 - Présent",
+      "description": "Développement et sécurisation de microservices avec des systèmes d'authentification avancés et gestion de certificats.",
+      "achievements": [
+        "Développement et sécurisation de microservices – Conception, mise en œuvre et optimisation d'architectures de microservices sécurisées, garantissant une intégration transparente avec des systèmes d'authentification comme Keycloak",
+        "Gestion des certificats et des tokens – Travail sur BerryCert et la nouvelle plateforme de gestion des tokens, gestion des identifiants TLS, YubiKey et intégrations SafeNet",
+        "Optimisation des performances & Automatisation – Amélioration des performances système en optimisant les appels API, mise en œuvre du multi-threading et automatisation des flux de travail clés pour une efficacité améliorée"
+      ]
+    },
+    {
+      "company": "Digitalberry",
+      "position": "Développeur Full Stack - Stagiaire",
+      "period": "Février 2023 - Mai 2023",
+      "description": "Construction d'une plateforme complète de signature numérique avec architecture microservices.",
+      "achievements": [
+        "Construction d'une plateforme de signature numérique utilisant Django, Angular et RabbitMQ",
+        "Collaboration avec des équipes interfonctionnelles comprenant des designers, des chefs de produit et d'autres développeurs pour créer des produits de haute qualité",
+        "Mise en œuvre d'une architecture de microservices utilisant Docker",
+        "Mise en œuvre d'un système de notification en temps réel utilisant RabbitMQ"
+      ]
+    },
+    {
+      "company": "Digi Smart Solutions",
+      "position": "Développeur Django Angular - Stagiaire",
+      "period": "Juin 2022 - Septembre 2022",
+      "description": "Développement et maintenance d'applications Web utilisant les technologies Django et Angular.",
+      "achievements": [
+        "Développement et maintenance d'applications Web utilisant Django et d'autres technologies connexes",
+        "Construction d'interfaces utilisateur utilisant Angular et d'autres technologies front-end",
+        "Construction d'API RESTful et intégration de services tiers",
+        "Création et maintenance de documentation pour les projets"
+      ]
+    }
+  ]
+}
+
