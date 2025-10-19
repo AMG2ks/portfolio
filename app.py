@@ -243,10 +243,7 @@ def contact():
             }), 400
         
         # Check if email is configured
-        mail_username = app.config.get('MAIL_USERNAME')
-        print(f"DEBUG: MAIL_USERNAME = '{mail_username}'")
-        
-        if not mail_username:
+        if not app.config.get('MAIL_USERNAME'):
             # Fallback: just log the message (for development/demo)
             print(f"Contact form submission from {name} ({email}): {message}")
             return jsonify({
