@@ -127,7 +127,7 @@ def get_portfolio_data():
                 'title': translations.get('projects_data', [{}])[0].get('title', 'Skrow - Freelance Marketplace'),
                 'description': translations.get('projects_data', [{}])[0].get('description', ''),
                 'technologies': ['Django', 'React', 'PostgreSQL', 'Docker', 'Azure', 'Celery', 'Redis', 'WebSocket'],
-                'live_url': 'https://skrow.switzerlandnorth.cloudapp.azure.com',
+                'live_url': 'https://skrowofficial.com/',
                 'image': 'skrow1.png'
             },
             {
