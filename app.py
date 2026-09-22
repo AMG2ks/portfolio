@@ -118,48 +118,64 @@ def get_portfolio_data():
         'Redis',
         'Celery',
         'Azure',
+        'AWS',
+        'Terraform',
         'WebSocket',
-        'Keycloak'
+        'Keycloak',
+        'PrimeNG'
         ],
-        'projects': [
-            {
-                'id': 4,
-                'title': translations.get('projects_data', [{}])[0].get('title', 'Skrow - Freelance Marketplace'),
-                'description': translations.get('projects_data', [{}])[0].get('description', ''),
-                'technologies': ['Django', 'React', 'PostgreSQL', 'Docker', 'Azure', 'Celery', 'Redis', 'WebSocket'],
-                'live_url': 'https://skrowofficial.com/',
-                'image': 'skrow1.png'
-            },
-            {
-                'id': 1,
-                'title': translations.get('projects_data', [{}, {}])[1].get('title', 'IoT Device Monitoring Dashboard') if len(translations.get('projects_data', [])) > 1 else 'IoT Device Monitoring Dashboard',
-                'description': translations.get('projects_data', [{}, {}])[1].get('description', '') if len(translations.get('projects_data', [])) > 1 else '',
-                'technologies': ['Django', 'Angular', 'ChartJS', 'PostgreSQL'],
-                'github_url': 'https://github.com/DigiSmartSolutions',
-                'live_url': '#',
-                'image': 'iot.jpg'
-            },
-            {
-                'id': 2,
-                'title': translations.get('projects_data', [{}, {}, {}])[2].get('title', 'BerrySign Digital Signature Platform') if len(translations.get('projects_data', [])) > 2 else 'BerrySign Digital Signature Platform',
-                'description': translations.get('projects_data', [{}, {}, {}])[2].get('description', '') if len(translations.get('projects_data', [])) > 2 else '',
-                'technologies': ['Django', 'Angular', 'RabbitMQ', 'Docker'],
-                'github_url': 'https://github.com/',
-                'live_url': '#',
-                'image': 'requests.png'
-            },
-            {
-                'id': 3,
-                'title': translations.get('projects_data', [{}, {}, {}, {}])[3].get('title', 'Smart Budget Manager') if len(translations.get('projects_data', [])) > 3 else 'Smart Budget Manager',
-                'description': translations.get('projects_data', [{}, {}, {}, {}])[3].get('description', '') if len(translations.get('projects_data', [])) > 3 else '',
-                'technologies': ['Python', 'Streamlit', 'SQLite', 'PostgreSQL'],
-                'github_url': 'https://github.com/AMG2ks/budget_manager',
-                'live_url': 'https://budgetmanager.streamlit.app',
-                'image': 'budget_manager.png'
-            },
-        ],
+        'projects': [],
         'experience': []
     }
+
+    # Project configs (static) — merged with translations.get('projects_data')
+    _project_configs = [
+        {
+            'id': 5,
+            'technologies': ['Django', 'Angular', 'PostgreSQL', 'Redis', 'Celery', 'Django Channels', 'AWS', 'Terraform', 'PrimeNG'],
+            'live_url': 'https://avenirclairevoyance.com/',
+            'image': 'avenir.png'
+        },
+        {
+            'id': 4,
+            'technologies': ['Django', 'React', 'PostgreSQL', 'Docker', 'Azure', 'Celery', 'Redis', 'WebSocket'],
+            'live_url': '#',
+            'image': 'skrow1.png'
+        },
+        {
+            'id': 1,
+            'technologies': ['Django', 'Angular', 'ChartJS', 'PostgreSQL'],
+            'github_url': 'https://github.com/DigiSmartSolutions',
+            'live_url': '#',
+            'image': 'iot.jpg'
+        },
+        {
+            'id': 2,
+            'technologies': ['Django', 'Angular', 'RabbitMQ', 'Docker'],
+            'github_url': 'https://github.com/',
+            'live_url': '#',
+            'image': 'requests.png'
+        },
+        {
+            'id': 3,
+            'technologies': ['Python', 'Streamlit', 'SQLite', 'PostgreSQL'],
+            'github_url': 'https://github.com/AMG2ks/budget_manager',
+            'live_url': 'https://budgetmanager.streamlit.app',
+            'image': 'budget_manager.png'
+        },
+    ]
+    _projects_data = translations.get('projects_data', [])
+    for idx, cfg in enumerate(_project_configs):
+        t = _projects_data[idx] if idx < len(_projects_data) else {}
+        portfolio_data['projects'].append({
+            'id': cfg['id'],
+            'title': t.get('title', f"Project {cfg['id']}"),
+            'description': t.get('description', ''),
+            'technologies': cfg['technologies'],
+            'github_url': cfg.get('github_url'),
+            'live_url': cfg.get('live_url'),
+            'image': cfg.get('image'),
+        })
     
     # Add translated experience data
     exp_data = translations.get('experience_data', [])

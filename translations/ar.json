@@ -59,6 +59,10 @@
   },
   "projects_data": [
     {
+      "title": "Avenir Claire Voyance — منصة الاستشارات",
+      "description": "Avenir Claire Voyance هي منصة استشارات لحجوزات العملاء وإدارة المستشارين والمدفوعات والمراسلة الفورية وعمليات الإدارة. مبنية بـ Django 5 و Django REST Framework و Channels و Celery و Angular 19 + PrimeNG، ومنشورة على AWS ECS Fargate باستخدام Terraform و ECR/RDS/S3 و GitHub Actions OIDC و AWS Secrets Manager. تتضمن باقات الاستشارات، دردشة WebSocket والحضور، محفظة Stripe، وسير عمل إداري قائم على الأدوار."
+    },
+    {
       "title": "Skrow - سوق العمل الحر",
       "description": "Skrow هي منصة حديثة ومتكاملة لسوق العمل الحر مصممة خصيصاً للسوق التونسي، تربط المستقلين المحليين بالعملاء محلياً ودولياً. تسد المنصة الفجوة بين المحترفين التونسيين المهرة والشركات التي تبحث عن خدمات عالية الجودة، مع دعم الاقتصاد المحلي والتحول الرقمي."
     },

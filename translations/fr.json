@@ -59,6 +59,10 @@
   },
   "projects_data": [
     {
+      "title": "Avenir Claire Voyance — Plateforme de Consultation",
+      "description": "Avenir Claire Voyance est une plateforme de consultation pour les réservations clients, la gestion des consultants, les paiements, la messagerie temps réel et l'administration. Construite avec Django 5, Django REST Framework, Channels & Celery et Angular 19 + PrimeNG, déployée sur AWS ECS Fargate avec Terraform, ECR/RDS/S3, GitHub Actions OIDC et AWS Secrets Manager. Inclut forfaits de consultation, chat WebSocket & présence, portefeuille Stripe et workflows admin basés sur les rôles."
+    },
+    {
       "title": "Skrow - Marketplace Freelance",
       "description": "Skrow est une plateforme moderne de marketplace freelance conçue spécifiquement pour le marché tunisien, connectant les freelances locaux avec des clients nationaux et internationaux. La plateforme comble le fossé entre les professionnels tunisiens qualifiés et les entreprises recherchant des services de qualité, tout en soutenant l'économie locale et la transformation numérique."
     },
